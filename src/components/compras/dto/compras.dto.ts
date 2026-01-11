@@ -1,0 +1,24 @@
+export class ComprasDto{   
+    id:number;
+    cod_producto:string;    
+    descripcion:string;     
+    num_factura:string;    
+    tipo_compra:string;    
+    precio_unitario:number;      
+    cantidad:number;      
+    subtotal:number;     
+    descuento:number;       
+    total_descuento:number;      
+    iva:number;      
+    total_iva:number;       
+    icui:number;      
+    total_icui:number;      
+    costo_unidad:number;       
+    total_compras:number;       
+    utilidad:number;      
+    precio_venta:number; 
+    num_mes:number;
+    num_year:number;   
+    fecha_registro:string;
+    hora_registro:string;
+}
