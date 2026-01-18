@@ -31,7 +31,7 @@ export class MovimientosService {
 
         const fecha = format(
             this.fecha_actual instanceof Date ? this.fecha_actual : new Date(),
-            'yyyy-MM-dd HH:mm'
+            'yyyy-MM-dd HH:mm:ss'
         );
 
         // 1️⃣ Agrupar de forma SEGURA
@@ -89,7 +89,10 @@ export class MovimientosService {
                 await manager.update(
                     this.ventaProducto.target,
                     { codProd: item.codProd },
-                    { existencia: stockDespues }
+                    {
+                        existencia: stockDespues,
+                        updatedAt: fecha,
+                    }
                 );
 
                 await manager.insert(this.movimientos.target, {

@@ -7,7 +7,6 @@ import { UsuarioEntity } from './entity/usuario.entity';
 import { AutLoginDto } from './dto/autLogin.dto';
 import { CreateLoginDto } from './dto/createLogin.dto';
 import { MenuEntity } from '../menu/entity/menu.entity';
-import { Token } from 'src/jwt/token';
 
 @Injectable()
 export class LoginService {
@@ -72,9 +71,6 @@ export class LoginService {
       }
     })
 
-    console.log("data: ", autLoginDto);
-
-
     if (!user) {
       return { status: 401, message: 'Credenciales incorrectas' };
     }
@@ -92,9 +88,6 @@ export class LoginService {
       .andWhere("user.clave = :clave", { clave: clave })
       .getOne()
   }
-
-
-
 }
 
 

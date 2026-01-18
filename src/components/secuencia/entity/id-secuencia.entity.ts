@@ -7,7 +7,7 @@ export class IdSecuenciaEntity {
     id: number;
 
     @Column()
-    consecutivo_factura: number
+    consecutivo_autorizado: number
 
     @Column({ nullable: true })
     numero_factura: number;

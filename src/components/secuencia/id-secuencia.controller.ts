@@ -11,12 +11,12 @@ export class IdSecuenciaController {
     private secuenciaService: IdSecuenciaService
   ) { }
 
-  @Put(':id')
-  funct_genera_factura_c(@Param('id') id: number, @Body() body: IdSecuenciaDto) {
-    return this.secuenciaService.funct_genera_factura_s(id, body)
+  @Put()
+  funct_genera_factura_c(@Body() body: IdSecuenciaDto) {
+    return this.secuenciaService.funct_genera_factura_s(body)
   }
 
-  @Get('/genera')
+  @Get()
   async funct_retorna_factura_c() {
     return await this.secuenciaService.funct_retorna_factura_s()
   }
