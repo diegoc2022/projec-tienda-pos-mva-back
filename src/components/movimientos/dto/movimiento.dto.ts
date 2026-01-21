@@ -1,6 +1,6 @@
 export class MovimientosDto {
     id: number;
-    producto_id: string;
+    codProd: string;
     tipo: string;
     cantidad: number;
     stock_antes: number;

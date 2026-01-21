@@ -13,6 +13,9 @@ export class MovimientosController {
         return this.movimientosService.funct_registra_salidas_s(body);
     }
 
-
+    @Post('stock')
+    async funct_registra_movimientos_c(@Body() body: any[]) {
+        return this.movimientosService.funct_registra_movimientos_s(body);
+    }
 }
 

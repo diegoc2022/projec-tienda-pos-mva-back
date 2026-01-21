@@ -3,7 +3,6 @@ import { MovimientosEntity } from './entity/movimientos.entity';
 import { Repository, DataSource } from 'typeorm';
 import { InjectRepository } from '@nestjs/typeorm';
 import { VentaProductoEntity } from '../venta-producto/entity/create_venta_producto.entity';
-import { MovimientosDto } from './dto/movimiento.dto';
 import { format } from 'date-fns';
 
 @Injectable()
@@ -97,16 +96,70 @@ export class MovimientosService {
 
                 await manager.insert(this.movimientos.target, {
                     codProd: item.codProd,
-                    tipo: 'SALIDA',
+                    tipo: 'Salida',
                     cantidad: item.cantidad,
                     stock_antes: stockAntes,
                     stock_despues: stockDespues,
-                    motivo: 'VENTA',
-                    referencia: 'FAC' + item.factura,
+                    motivo: 'Venta',
+                    referencia: 'Fac: ' + item.factura,
                     vendedor: item.vendedor,
                     fecha_registro: fecha,
                 });
             }
+        });
+
+        return {
+            ok: true,
+            mensaje: 'Movimientos registrados correctamente',
+        };
+    }
+
+
+    async funct_registra_movimientos_s(data: any[]) {
+        if (!Array.isArray(data)) {
+            throw new Error('Data no es un array');
+        }
+
+        const fecha = format(
+            this.fecha_actual instanceof Date ? this.fecha_actual : new Date(),
+            'yyyy-MM-dd HH:mm:ss'
+        );
+
+        // 1️⃣ Agrupar de forma SEGURA
+        const mapa = new Map<string, {
+            codProd: string;
+            cantidad: number;
+            factura: string;
+            vendedor: string;
+        }>();
+
+
+
+        await this.dataSource.transaction(async (manager) => {
+
+            const stockDespues = data[0].existencia;
+
+            await manager.update(
+                this.ventaProducto.target,
+                { codProd: data[0].codProd },
+                {
+                    existencia: data[0].ajuste,
+                    updatedAt: fecha,
+                }
+            );
+
+            await manager.insert(this.movimientos.target, {
+                codProd: data[0].codProd,
+                tipo: data[0].tipo,
+                cantidad: data[0].ajuste,
+                stock_antes: data[0].existencia,
+                stock_despues: data[0].ajuste,
+                motivo: data[0].motivo,
+                referencia: 'Inventario',
+                vendedor: 'User-bodega',
+                fecha_registro: fecha,
+            });
+
         });
 
         return {
