@@ -29,8 +29,7 @@ import { NominaModule } from './components/nomina/nomina.module';
 import { MenuModule } from './components/menu/menu.module';
 import { LoginModule } from './components/usuarios/usuario.module';
 import { MovimientosModule } from './components/movimientos/movimientos.module';
-dotenv.config();
-
+dotenv.config(); // carga el archivo .env
 
 @Module({
   imports: [
@@ -39,11 +38,11 @@ dotenv.config();
     ComprasHistoricoModule,
     TypeOrmModule.forRoot({
       type: 'postgres',
-      host: 'localhost',
-      port: 5432,
-      username: 'postgres',
-      password: 'dacs448@230972',
-      database: 'tiendapos_vm',
+      host: process.env.DB_HOST,
+      port: parseInt(process.env.DB_PORT),
+      username: process.env.DB_USER,
+      password: process.env.DB_PASSWORD,
+      database: process.env.DB_NAME,
       entities: [__dirname + '/**/*.entity{.js,.ts}'],
       synchronize: true,
     }),
