@@ -1,8 +1,8 @@
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { DataSource, Repository } from 'typeorm'
-import { IdSecuenciaEntity } from './entity/id-secuencia.entity';
-import { IdSecuenciaDto } from './dto/id-secuencia.dto';
+import { IdSecuenciaFactEntity } from './entity/id-secuencia.entity';
+import { IdSecuenciaFactDto } from './dto/id-secuencia.dto';
 
 
 
@@ -10,12 +10,12 @@ import { IdSecuenciaDto } from './dto/id-secuencia.dto';
 export class IdSecuenciaService {
     result: any
     constructor(
-        @InjectRepository(IdSecuenciaEntity)
-        private readonly repository: Repository<IdSecuenciaEntity>,
+        @InjectRepository(IdSecuenciaFactEntity)
+        private readonly repository: Repository<IdSecuenciaFactEntity>,
         private readonly dataSource: DataSource
     ) { }
 
-    async funct_genera_factura_s(body: IdSecuenciaDto) {
+    async funct_genera_factura_s(body: IdSecuenciaFactDto) {
         const { numero_factura } = body[0]
         const queryRunner = this.dataSource.createQueryRunner();
 
@@ -46,7 +46,7 @@ export class IdSecuenciaService {
                 this.repository.target,
                 { id: 1 },
                 {
-                    numero_factura: numeroFactura,
+                    num_secuencia: numeroFactura,
                     consecutivo_disponible: consecutivoDisponible,
                     fecha_registro: Date.now()
                         ? new Date()
@@ -64,7 +64,7 @@ export class IdSecuenciaService {
     }
 
 
-    async funct_retorna_factura_s(): Promise<IdSecuenciaEntity> {
+    async funct_retorna_factura_s(): Promise<IdSecuenciaFactEntity> {
         const result = await this.repository.findOne({
             where: {
                 id: 1

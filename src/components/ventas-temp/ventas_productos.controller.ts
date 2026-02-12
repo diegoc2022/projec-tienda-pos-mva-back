@@ -2,7 +2,7 @@
 import { Body, Controller, Delete, Get, Param, ParseIntPipe, Patch, Post, Put } from '@nestjs/common';
 import { VentasProductosService } from './ventas_productos.service';
 import { CreateVentaProductosDto } from './dto/create_venta_productos.dto';
-import { UpdateVentaProductosDto } from 'src/components/ventas/dto/update_ventas.dto';
+import { UpdateVentaProductosDto } from 'src/components/ventas-temp/dto/update_ventas.dto';
 
 @Controller('ventas-temp')
 export class VentasProductosController {

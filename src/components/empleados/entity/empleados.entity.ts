@@ -1,23 +1,26 @@
 import { Column, Entity, PrimaryColumn } from "typeorm";
 
-@Entity({name:'tbl_empleados'})
-export class EmpleadosEntity{
-    @PrimaryColumn()  
-    cedula:string;
-   
-    @Column()
-    nombre:string;
+@Entity({ name: 'tbl_empleados' })
+export class EmpleadosEntity {
+    @PrimaryColumn()
+    cedula: string;
 
     @Column()
-    direccion:string;
+    nombre_empleado: string;
 
     @Column()
-    telefono:string;
+    usuario: string;
 
     @Column()
-    ciudad:string;
+    direccion: string;
 
-    @Column({type:'timestamp',default:()=>'CURRENT_TIMESTAMP'})
-    fecha_registro:Date
+    @Column()
+    telefono: string;
+
+    @Column()
+    ciudad: string;
+
+    @Column({ type: 'timestamp', default: () => 'CURRENT_TIMESTAMP' })
+    fecha_registro: Date
 
 }

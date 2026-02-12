@@ -1,8 +1,8 @@
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { CreateVentaProductosDto } from 'src/components/ventas/dto/create_venta_productos.dto';
-import { UpdateVentaProductosDto } from 'src/components/ventas/dto/update_ventas.dto';
-import { VentasProductosEntity } from 'src/components/ventas/entity/create_venta_productos.entity';
+import { CreateVentaProductosDto } from 'src/components/ventas-temp/dto/create_venta_productos.dto';
+import { UpdateVentaProductosDto } from 'src/components/ventas-temp/dto/update_ventas.dto';
+import { VentasProductosEntity } from 'src/components/ventas-temp/entity/create_venta_productos.entity';
 import { Repository } from 'typeorm';
 
 

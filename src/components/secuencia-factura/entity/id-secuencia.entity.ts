@@ -1,7 +1,7 @@
 import { Column, Entity, PrimaryGeneratedColumn } from "typeorm";
 
-@Entity({ name: 'tbl_secuencias' })
-export class IdSecuenciaEntity {
+@Entity({ name: 'tbl_secuencia_fact' })
+export class IdSecuenciaFactEntity {
 
     @PrimaryGeneratedColumn('increment')
     id: number;
@@ -10,7 +10,7 @@ export class IdSecuenciaEntity {
     consecutivo_autorizado: number
 
     @Column({ nullable: true })
-    numero_factura: number;
+    num_secuencia: number;
 
     @Column({ nullable: true })
     consecutivo_disponible: number

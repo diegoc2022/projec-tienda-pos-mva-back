@@ -1,17 +1,16 @@
-import { GastosModule } from './components/gastos/gastos.module';
+import { GastosModule } from './components/gastos-operativos/gastos.module';
 import { PagosModule } from './components/pagos/pagos.module';
 import { ComprasHistoricoModule } from './components/compras-historico/compras-historico.module';
 import { VentasHistoricoModule } from './components/ventas-historico/ventashistorico.module';
 import { ComprasFacturasModule } from './components/compras-facturas/compras-facturas.module';
 import { ComprasModule } from './components/compras/compras.module';
-import { DenominacionModule } from './components/denominacion/denominacion.module';
-import { EditaPreciosModule } from './components/edita-precios/edita-precios.module';
-import { CajaModule } from './components/caja/caja.module';
-import { IdSecuenciaModule } from './components/secuencia/id-secuencia.module';
+import { EditaPreciosModule } from './components/ajustes-varios/edita-precios.module';
+import { CajaModule } from './components/apertura-caja/caja.module';
+import { IdSecuenciaModule } from './components/secuencia-factura/id-secuencia.module';
 import { VinculosModule } from './components/viculos/vinculos.module';
 import { CloseVentasModule } from './components/close-ventas/close-ventas.module';
-import { EncabezadoModule } from './components/encabezado/encabezado.module';
-import { VentasProductosModule } from './components/ventas/ventas_productos.module';
+import { EncabezadoModule } from './components/encabezado-fact/encabezado.module';
+import { VentasProductosModule } from './components/ventas-temp/ventas_productos.module';
 import { InventarioModule } from './components/inventario/inventario.module';
 import { ProveedoresModule } from './components/proveedores/proveedores.module';
 import { EmpleadosModule } from './components/empleados/empleados.module';
@@ -49,7 +48,6 @@ dotenv.config(); // carga el archivo .env
     VentasHistoricoModule,
     ComprasFacturasModule,
     ComprasModule,
-    DenominacionModule,
     EditaPreciosModule,
     CajaModule,
     VinculosModule,

@@ -17,47 +17,50 @@ export class LoginService {
 
     @InjectRepository(MenuEntity)
     private readonly menuRepository: Repository<MenuEntity>,
-    private readonly jwtService: JwtService
+    private readonly jwt: JwtService
   ) { }
 
   // 🔐 LOGIN
   async funct_valida_usuario_s(authDto: AutLoginDto) {
     // 1️⃣ Buscar usuario
-    const user = await this.userRepository.findOne({
+    const result = await this.userRepository.findOne({
       where: { user: authDto.user }
     });
 
-    if (!user) return null;
+    if (!result) return null;
 
     // 2️⃣ Validar contraseña
     const isValidPassword = await bcrypt.compare(
       authDto.clave,
-      user.clave
+      result.clave
     );
 
     if (!isValidPassword) return null;
 
     // 3️⃣ Payload JWT
     const payload = {
-      sub: user.id_user,
-      rol: user.id_rol
+      sub: result.id_user,
+      rol: result.id_rol,
+      user: result.user
     };
 
     // 4️⃣ Obtener menú por rol
     const menu = await this.menuRepository
       .createQueryBuilder('menu')
       .innerJoin('menu.rolMenus', 'rm')
-      .where('rm.id_rol = :rol', { rol: user.id_rol })
+      .where('rm.id_rol = :rol', { rol: result.id_rol })
       .andWhere('menu.activo = true')
       .orderBy('menu.orden', 'ASC')
       .getMany();
 
     // 5️⃣ Respuesta final
     return {
-      token: this.jwtService.sign(payload),
-      user: {
-        id_user: user.id_user,
-        id_rol: user.id_rol
+      data: {
+        id_user: result.id_user,
+        id_rol: result.id_rol,
+        user: result.user,
+        status: 200,
+        token: this.jwt.sign(payload),
       },
       menu
     };
@@ -74,8 +77,20 @@ export class LoginService {
     if (!user) {
       return { status: 401, message: 'Credenciales incorrectas' };
     }
-    //const toke = this.jwt.func_retorna_token(user);
-    return { status: 200, result: user };
+
+    const payload = {
+      id: user.id_user,
+      user: user.user
+    };
+
+    return {
+      token: this.jwt.sign(payload),
+      data: {
+        status: 200,
+        result: user
+      }
+
+    };
   }
 
 

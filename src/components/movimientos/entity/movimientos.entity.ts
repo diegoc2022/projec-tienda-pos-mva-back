@@ -2,7 +2,7 @@ import { Entity, PrimaryGeneratedColumn, Column, ManyToOne, CreateDateColumn, Jo
 import { VentaProductoEntity } from 'src/components/venta-producto/entity/create_venta_producto.entity';
 import { UsuarioEntity } from 'src/components/usuarios/entity/usuario.entity';
 
-@Entity({ name: 'tbl_movimientos' })
+@Entity({ name: 'tbl_movimiento_inv' })
 export class MovimientosEntity {
     @PrimaryGeneratedColumn()
     id: number;
