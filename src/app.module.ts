@@ -44,6 +44,7 @@ dotenv.config(); // carga el archivo .env
       database: process.env.DB_NAME,
       entities: [__dirname + '/**/*.entity{.js,.ts}'],
       synchronize: true,
+      logging: true,
     }),
     VentasHistoricoModule,
     ComprasFacturasModule,

@@ -7,11 +7,6 @@ import { InventariosDto } from './dto/edita-ventas-inventario.dto';
 export class InventarioController {
     constructor(private inventarioService: InventarioService) { }
 
-    @Post('editaVentaInv')
-    async funt_edita_ventas_inventarios_c(@Body() data: any[]): Promise<InventariosDto[]> {
-        return await this.inventarioService.funct_edita_ventas_inventarios_s(data);
-    }
-
     @Patch()
     async funt_edita_compras_inventarios_c(@Body() data: any): Promise<any> {
         return await this.inventarioService.funct_edita_compras_inventarios_s(data);

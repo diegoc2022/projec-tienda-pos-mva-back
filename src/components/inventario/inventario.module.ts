@@ -3,9 +3,10 @@ import { InventarioController } from './inventario.controller';
 import { Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { VentaProductoEntity } from '../venta-producto/entity/create_venta_producto.entity';
+import { MovimientosEntity } from '../movimientos/entity/movimientos.entity';
 
 @Module({
-    imports: [TypeOrmModule.forFeature([VentaProductoEntity])],
+    imports: [TypeOrmModule.forFeature([VentaProductoEntity, MovimientosEntity])],
     controllers: [
         InventarioController,],
     providers: [

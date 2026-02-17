@@ -41,8 +41,11 @@ export class VentaProductoEntity {
     @Column({ type: 'timestamp', default: () => 'CURRENT_TIMESTAMP' })
     createAt: Date
 
-    @UpdateDateColumn({ name: 'updated_at' })
-    updatedAt: Date;
+    @UpdateDateColumn()
+    updated_at: Date;
+
+    @Column({ nullable: true })
+    activo: boolean;
 
     @OneToMany(() => VinculosEntity, (cod) => cod.producto)
     codigoVinculo: VinculosEntity;

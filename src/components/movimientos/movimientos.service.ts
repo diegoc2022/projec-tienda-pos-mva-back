@@ -90,7 +90,8 @@ export class MovimientosService {
                     { codProd: item.codProd },
                     {
                         existencia: stockDespues,
-                        updatedAt: fecha,
+                        updated_at: fecha,
+                        activo: true
                     }
                 );
 
@@ -144,7 +145,8 @@ export class MovimientosService {
                 { codProd: data[0].codProd },
                 {
                     existencia: data[0].ajuste,
-                    updatedAt: fecha,
+                    updated_at: fecha,
+                    activo: true
                 }
             );
 
