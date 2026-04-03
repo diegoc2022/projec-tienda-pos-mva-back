@@ -100,10 +100,8 @@ export class VinculosService {
     }
   }
 
-  getVinculos() {
-    return this.vinculosRepository.find({
-      relations: ['producto']
-    });
+  get_codigo_vinculos_s() {
+    return this.vinculosRepository.find();
   }
 
   async eliminaVinculos(codInic: string, codVinc: string) {

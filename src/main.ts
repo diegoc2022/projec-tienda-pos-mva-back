@@ -17,6 +17,7 @@ async function bootstrap() {
     MODE_ENV === 'production'
       ? [
         'https://variedadesmariangel.com',
+        'http://108.181.191.228:4203',
         'http://localhost:3008',
         'http://localhost:4200'
       ]
@@ -30,7 +31,7 @@ async function bootstrap() {
   // Body parser y validaciones
   app.use(bodyParser.json({ limit: '50mb' }));
   app.use(bodyParser.urlencoded({ limit: '50mb', extended: true }));
-
+  //app.setGlobalPrefix('api');
   app.enableCors({
     origin: CORS_ORIGIN,
     methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
@@ -46,3 +47,5 @@ async function bootstrap() {
 }
 
 bootstrap();
+
+

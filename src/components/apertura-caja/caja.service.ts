@@ -16,6 +16,8 @@ export class CajaService {
   ) { }
 
   async funct_actualiza_apertura_caja_s(id: number, data: UpdateCajaDto): Promise<CreateCajaEntity> {
+    console.log("Data: ", id);
+
     const caja = await this.cajaRepository.preload({
       id,
       ...data,
@@ -30,14 +32,19 @@ export class CajaService {
 
 
   async funct_retorna_apertura_caja_s(user: string): Promise<CreateCajaEntity> {
-    const result = await this.cajaRepository
-      .createQueryBuilder('alias') // Replace 'alias' with your desired alias
-      .orderBy('alias.id', 'DESC') // Replace 'id' with the primary key or sorting column
-      .limit(1) // Limit the result to 1 row
-      .getOne();
+    const result = await this.cajaRepository.findOne({
+      where: {
+        vendedor: user
+      },
+      order: { id: 'DESC' }
+    });
+
+    if (!result) {
+      throw new Error('No hay caja abierta');
+    }
+
     return result;
   }
-
 
 }
 

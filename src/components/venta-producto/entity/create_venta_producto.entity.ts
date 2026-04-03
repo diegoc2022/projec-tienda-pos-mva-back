@@ -41,7 +41,7 @@ export class VentaProductoEntity {
     @Column({ type: 'timestamp', default: () => 'CURRENT_TIMESTAMP' })
     createAt: Date
 
-    @UpdateDateColumn()
+    @UpdateDateColumn({ type: 'timestamp without time zone' })
     updated_at: Date;
 
     @Column({ nullable: true })

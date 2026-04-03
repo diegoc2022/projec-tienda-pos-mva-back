@@ -1,4 +1,4 @@
-import { Column, Entity, PrimaryGeneratedColumn } from "typeorm";
+import { Column, Entity, PrimaryGeneratedColumn, UpdateDateColumn } from "typeorm";
 
 @Entity({ name: 'tbl_apertura_caja' })
 export class CreateCajaEntity {
@@ -14,7 +14,7 @@ export class CreateCajaEntity {
     @Column({ nullable: true })
     total_base: number;
 
-    @Column({ type: 'timestamp', default: () => 'CURRENT_TIMESTAMP' })
+    @UpdateDateColumn({ type: 'timestamp without time zone' })
     fecha_registro: Date;
 
 }
