@@ -1,6 +1,5 @@
 import { Body, Controller, Get, Param, Patch, Post } from '@nestjs/common';
 import { InventarioService } from './inventario.service';
-import { InventariosDto } from './dto/edita-ventas-inventario.dto';
 
 
 @Controller('inventario')

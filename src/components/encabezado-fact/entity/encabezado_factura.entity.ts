@@ -1,7 +1,7 @@
 import { Column, Entity, PrimaryGeneratedColumn, NonObjectIdLikeDocument } from 'typeorm';
 
 
-@Entity({ name: 'tbl_encabezado_facturas' })
+@Entity({ name: 'tbl_encabezado_fact' })
 export class EncabezadoFacturaEntity {
 
     @PrimaryGeneratedColumn('increment')
@@ -11,7 +11,7 @@ export class EncabezadoFacturaEntity {
     razon_social: string;
 
     @Column()
-    nonbre_titular: string;
+    nombre_titular: string;
 
     @Column()
     nit: string;
@@ -25,19 +25,14 @@ export class EncabezadoFacturaEntity {
     @Column()
     Celular: string;
 
-    @Column()
-    cliente_final: string;
+    @Column({ nullable: true })
+    fecha_desde: string;
 
-    @Column()
-    cedula_cliente: string;
+    @Column({ nullable: true })
+    fecha_hasta: string;
 
-    @Column()
-    dir_cliente: string;
-
-    @Column()
-    tel_cliente: string;
 
     @Column({ type: 'timestamp', default: () => 'CURRENT_TIMESTAMP' })
-    createAp: Date;
+    fecha_registros: Date;
 }
 

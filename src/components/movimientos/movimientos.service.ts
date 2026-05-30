@@ -4,6 +4,7 @@ import { Repository, DataSource } from 'typeorm';
 import { InjectRepository } from '@nestjs/typeorm';
 import { VentaProductoEntity } from '../venta-producto/entity/create_venta_producto.entity';
 import { format } from 'date-fns';
+import { InventarioGateway } from 'src/socketIO/gateway';
 
 @Injectable()
 export class MovimientosService {
@@ -17,7 +18,9 @@ export class MovimientosService {
 
         @InjectRepository(VentaProductoEntity)
         private ventaProducto: Repository<VentaProductoEntity>,
-        private dataSource: DataSource
+        private dataSource: DataSource,
+
+        private inventarioGateway: InventarioGateway
     ) { }
 
 
@@ -94,6 +97,12 @@ export class MovimientosService {
                         activo: true
                     }
                 );
+
+                this.inventarioGateway.emitirCambio({
+                    codProd: item.codProd,
+                    existencia: stockDespues,
+                    updated_at: fecha
+                });
 
                 await manager.insert(this.movimientos.target, {
                     codProd: item.codProd,

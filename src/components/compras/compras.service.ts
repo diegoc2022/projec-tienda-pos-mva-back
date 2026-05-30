@@ -9,31 +9,31 @@ import { ComprasDto } from './dto/compras.dto';
 export class ComprasService {
     constructor(
         @InjectRepository(ComprasEntity)
-        private compras: Repository<ComprasEntity>        
-    ){}
+        private compras: Repository<ComprasEntity>
+    ) { }
 
-   async functCreateCompras(createCompras:ComprasDto):Promise<ComprasEntity>{               
-       return await this.compras.save(createCompras);
+    async functCreateCompras(createCompras: ComprasDto): Promise<ComprasEntity> {
+        return await this.compras.save(createCompras);
     }
 
-   async functRetornaCompras():Promise<ComprasEntity[]>{
+    async functRetornaCompras(): Promise<ComprasEntity[]> {
         return await this.compras.find();
     }
 
-   async functEliminaItemCompras(id:any):Promise<boolean>{                 
-      const result =  await this.compras.delete({id:id});
-      return result.affected > 0;
+    async functEliminaItemCompras(id: any): Promise<boolean> {
+        const result = await this.compras.delete({ id: id });
+        return result.affected > 0;
     }
 
-   async functEliminaFacturaCompras(id:any):Promise<boolean>{
-    console.log("Fact: ",id);
-                              
-      const result =  await this.compras.delete({num_factura:id});
-      return result.affected > 0;
+    async functEliminaFacturaCompras(id: any): Promise<boolean> {
+        console.log("Fact: ", id);
+
+        const result = await this.compras.delete({ num_factura: id });
+        return result.affected > 0;
     }
 
-    async funct_elimina_facturas_compras_temp(){                                
-        return  await this.compras.clear();        
+    async funct_elimina_facturas_compras_temp() {
+        return await this.compras.clear();
     }
-    
+
 }
