@@ -16,8 +16,6 @@ export class CajaService {
   ) { }
 
   async funct_actualiza_apertura_caja_s(id: number, data: UpdateCajaDto): Promise<CreateCajaEntity> {
-    console.log("Data: ", id);
-
     const caja = await this.cajaRepository.preload({
       id,
       ...data,

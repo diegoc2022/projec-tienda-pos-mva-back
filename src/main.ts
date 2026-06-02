@@ -8,7 +8,7 @@ dotenv.config();
 
 async function bootstrap() {
   const MODE_ENV = process.env.NODE_ENV || 'development';
-  const PORT = 3009;
+  const PORT = 3008;
   const CORS_ORIGIN =
     MODE_ENV === 'production'
       ? [
@@ -32,8 +32,7 @@ async function bootstrap() {
 
   app.useGlobalPipes(
     new ValidationPipe({
-      whitelist: true,
-      transform: true,
+
     }),
   );
 

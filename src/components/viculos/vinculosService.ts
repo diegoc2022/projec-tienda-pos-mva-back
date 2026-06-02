@@ -12,9 +12,8 @@ export class VinculosService {
     @InjectRepository(VinculosEntity) private vinculosRepository: Repository<VinculosEntity>
   ) { }
 
-  async getVinculosId(id: string) {
+  async funct_retorna_un_vinculo_s(id: any) {
     const codigo = id.toUpperCase();
-
     // Primero busca por codigoInicial
     let result = await this.vinculosRepository.find({
       where: {
@@ -45,76 +44,102 @@ export class VinculosService {
     }
   }
 
+  async funct_retorna_asociacion_vinculo_s(id: any) {
+    const codigo = id.toUpperCase();
+    // Primero busca por codigoVinculo
+    let result = await this.vinculosRepository.find({
+      where: {
+        codigoVinculo: codigo.toUpperCase()
+      },
+      relations: ['producto']
+    });
 
-
-  async functCreateVinculos(data: CreateVinculosDTO) {
-    const codigoInicial = data.codigoInicial.toUpperCase();
-    const codigoVinculo = data.codigoVinculo.toUpperCase();
-
-    try {
-      // Verificar si ya existe un vínculo con esa combinación
-      const existe = await this.vinculosRepository.findOne({
-        where: {
-          codigoInicial,
-          codigoVinculo
-        }
-      });
-
-      if (existe) {
-        return {
-          code: 409,
-          msg: 'Ya existe un registro con esas mismas características'
-        };
-      }
-
-      // Crear entidad sin ID
-      const nuevoVinculo = this.vinculosRepository.create({
-        codigoInicial,
-        codigoVinculo
-      });
-
-      // Guardar en base de datos
-      const saved = await this.vinculosRepository.save(nuevoVinculo);
-
+    // Si encuentra algo por codigo vinculo, lo retorna
+    if (result.length > 0) {
+      return result;
+    } else {
       return {
-        code: 201,
-        msg: 'Vínculo creado exitosamente',
-        data: saved
-      };
-
-    } catch (error) {
-      if (error.code === '23505') {
-        // Código PostgreSQL para clave duplicada
-        return {
-          code: 409,
-          msg: 'Error: ya existe un vínculo con ese ID'
-        };
-      }
-
-      // Otros errores no controlados
-      console.error('Error al crear vínculo:', error);
-      return {
-        code: 500,
-        msg: 'Error interno del servidor'
+        statusCode: 404,
+        message: 'El producto que intenta vender no existe o no se encuentra asociado',
+        error: 'Not Found'
       };
     }
   }
 
-  get_codigo_vinculos_s() {
+
+  async funct_registra_vinculos_s(data: CreateVinculosDTO | CreateVinculosDTO[],) {
+    try {
+      const registros = Array.isArray(data) ? data : [data];
+
+      const registrosGuardar = [];
+      const duplicados = [];
+
+      for (const item of registros) {
+        const codigoInicial = String(item.codigoInicial || '').toUpperCase();
+        const codigoVinculo = String(item.codigoVinculo || '').toUpperCase();
+
+        const existe = await this.vinculosRepository.findOne({
+          where: {
+            codigoInicial,
+            codigoVinculo,
+          },
+        });
+
+        if (existe) {
+          duplicados.push({
+            codigoInicial,
+            codigoVinculo,
+          });
+          continue;
+        }
+
+        registrosGuardar.push({
+          codigoInicial,
+          codigoVinculo,
+        });
+      }
+
+      if (registrosGuardar.length === 0) {
+        return {
+          code: 409,
+          msg: 'Todos los registros ya existen',
+          duplicados,
+        };
+      }
+
+      const saved = await this.vinculosRepository.save(
+        registrosGuardar,
+      );
+
+      return {
+        code: 201,
+        msg: `${saved.length} vínculo(s) creado(s) exitosamente`,
+        creados: saved,
+        duplicados,
+      };
+    } catch (error) {
+      console.error('Error al crear vínculos:', error);
+
+      return {
+        code: 500,
+        msg: 'Error interno del servidor',
+      };
+    }
+  }
+
+  funct_retorna_full_vinculos_s() {
     return this.vinculosRepository.find();
   }
 
-  async eliminaVinculos(codInic: string, codVinc: string) {
+  async funct_elimina_vinculos_s(codVinc: any) {
     const result = await this.vinculosRepository.find({
       where: {
-        codigoInicial: codInic.toUpperCase(),
         codigoVinculo: codVinc.toUpperCase()
-      },
-      relations: ['producto']
+      }
     })
 
     if (result.length > 0) {
-      return await this.vinculosRepository.delete({ codigoInicial: codInic, codigoVinculo: codVinc });
+      return await this.vinculosRepository.delete({ codigoVinculo: codVinc });
     } else {
       return {
         "code": 409,

@@ -10,22 +10,27 @@ export class VinculosController {
     ) { }
 
     @Post()
-    functRegistraVinculos(@Body() createVinculosDto: CreateVinculosDTO) {
-        return this.vinculosService.functCreateVinculos(createVinculosDto);
+    funct_registra_vinculos_c(@Body() createVinculosDto: CreateVinculosDTO) {
+        return this.vinculosService.funct_registra_vinculos_s(createVinculosDto);
     }
 
     @Get(':id')
-    async getVinculosId(@Param('id') id: string) {
-        return await this.vinculosService.getVinculosId(id);
+    async funct_retorna_codigo_inicial_c(@Param('id') id: any) {
+        return await this.vinculosService.funct_retorna_un_vinculo_s(id);
+    }
+
+    @Get('/vinc/:id')
+    async funct_retorna_codigo_vinculo_c(@Param('id') id: any) {
+        return await this.vinculosService.funct_retorna_asociacion_vinculo_s(id);
     }
 
     @Get()
-    get_codigo_vinculos() {
-        return this.vinculosService.get_codigo_vinculos_s();
+    funct_retorna_full_vinculos_c() {
+        return this.vinculosService.funct_retorna_full_vinculos_s();
     }
 
-    @Delete(':codInic/:codVinc')
-    eliminaViculos(@Param('codInic') codInic: string, @Param('codVinc') codVinc: string) {
-        return this.vinculosService.eliminaVinculos(codInic, codVinc)
+    @Delete(':codVinc')
+    funct_elimina_viculos_c(@Param('codVinc') codVinc: any) {
+        return this.vinculosService.funct_elimina_vinculos_s(codVinc)
     }
 }

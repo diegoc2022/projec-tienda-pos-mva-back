@@ -24,8 +24,8 @@ export class LoginController {
 
 
   @Post('user')
-  async loginData2(@Body() loginDto: AutLoginDto) {
-    return await this.loginService.funValidaUsuario(loginDto);
+  async funct_valida_usuario_c(@Body() loginDto: any) {
+    return await this.loginService.funct_valida_usuario_s(loginDto);
   }
 
   @Post('hash')

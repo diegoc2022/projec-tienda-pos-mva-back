@@ -28,9 +28,6 @@ import { NominaModule } from './components/nomina/nomina.module';
 import { MenuModule } from './components/menu/menu.module';
 import { LoginModule } from './components/usuarios/usuario.module';
 import { MovimientosModule } from './components/movimientos/movimientos.module';
-import { AxiosModule } from './components/axios/axios.module';
-import { FacturarElectronicoModule } from './components/facturar-electronico/facturar-electronico.module';
-import { FacturarFeModule } from './components/facturar-fe/facturar-fe.module';
 dotenv.config(); // carga el archivo .env
 
 @Module({
@@ -46,7 +43,7 @@ dotenv.config(); // carga el archivo .env
       password: process.env.DB_PASSWORD,
       database: process.env.DB_NAME,
       entities: [__dirname + '/**/*.entity{.js,.ts}'],
-      synchronize: true,
+      synchronize: false,
       logging: false,
     }),
     VentasHistoricoModule,
@@ -74,12 +71,7 @@ dotenv.config(); // carga el archivo .env
     NominaModule,
     MenuModule,
     LoginModule,
-    MovimientosModule,
-    AxiosModule,
-    FacturarElectronicoModule,
-    FacturarFeModule,
-
-
+    MovimientosModule
   ],
   controllers: [
     AppController
