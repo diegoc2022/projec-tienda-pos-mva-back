@@ -1,7 +1,33 @@
 import { VentaProductoEntity } from "src/components/venta-producto/entity/create_venta_producto.entity";
-import { Entity } from "typeorm";
+import { Column, CreateDateColumn, Entity, JoinColumn, ManyToOne, PrimaryColumn, PrimaryGeneratedColumn } from "typeorm";
 
-@Entity({name:'tbl_clasificacion'})
-export class InventariosEntity extends VentaProductoEntity{    
-    
+@Entity({ name: 'tbl_inventario' })
+export class InventariosEntity {
+    @PrimaryGeneratedColumn('increment')
+    id: number
+
+    @Column({ type: 'int' })
+    id_inventario: number;
+
+    @Column({ unique: true })
+    codprod: string;
+
+    @Column({ type: 'int' })
+    stock_actual: number;
+
+    @Column({ type: 'int' })
+    stock_despues: number;
+
+    @Column({ nullable: true })
+    id_tipo: string;
+
+    @Column({ nullable: true })
+    nombre_tipo: string;
+
+    @Column({ nullable: true })
+    vendedor: string;
+
+    @CreateDateColumn()
+    fecha_registro: Date;
+
 }

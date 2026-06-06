@@ -28,6 +28,8 @@ import { NominaModule } from './components/nomina/nomina.module';
 import { MenuModule } from './components/menu/menu.module';
 import { LoginModule } from './components/usuarios/usuario.module';
 import { MovimientosModule } from './components/movimientos/movimientos.module';
+import { AperturaInventarioModule } from './components/apertura-inventario/apertura-inventario.module';
+import { InventarioActualModule } from './components/inventario-actual/inventario-actual.module';
 dotenv.config(); // carga el archivo .env
 
 @Module({
@@ -71,7 +73,9 @@ dotenv.config(); // carga el archivo .env
     NominaModule,
     MenuModule,
     LoginModule,
-    MovimientosModule
+    MovimientosModule,
+    AperturaInventarioModule,
+    InventarioActualModule
   ],
   controllers: [
     AppController

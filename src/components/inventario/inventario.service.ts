@@ -5,6 +5,9 @@ import { VentaProductoEntity } from '../venta-producto/entity/create_venta_produ
 import { format } from 'date-fns';
 import { DataSource } from 'typeorm';
 import { MovimientosEntity } from '../movimientos/entity/movimientos.entity';
+import { UpdateInventarioDto } from './dto/update-inventario';
+import { CreateInventarioDto } from './dto/create-inventario';
+import { InventariosEntity } from './entity/inventario.entity';
 
 
 @Injectable()
@@ -20,8 +23,15 @@ export class InventarioService {
 
     @InjectRepository(MovimientosEntity)
     private movimientos: Repository<MovimientosEntity>,
+
+    @InjectRepository(InventariosEntity)
+    private inventario: Repository<InventariosEntity>,
   ) { }
 
+  async funct_registra_inventarios_s(data: CreateInventarioDto[]) {
+    const result = await this.inventario.save(data)
+    return result;
+  }
 
   async funct_edita_compras_inventarios_s(data: any[]): Promise<any[]> {
     const fecha = format(this.fecha_actual, 'yyyy-MM-dd HH:mm');
