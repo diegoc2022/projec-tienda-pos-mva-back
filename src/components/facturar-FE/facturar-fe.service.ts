@@ -1,13 +1,23 @@
 import { Injectable } from '@nestjs/common';
 import { HttpService } from '@nestjs/axios';
-import { firstValueFrom } from 'rxjs';
+import { VentasProductosService } from '../ventas-temp/ventas_productos.service';
 
 @Injectable()
 export class FacturarFeService {
-  constructor(private readonly httpService: HttpService) { }
+  constructor(
+    private readonly httpService: HttpService,
+    private ventas_tem: VentasProductosService
+  ) { }
 
-  async funct_generate_factura_fe_s(body: any) {
-    const response = await firstValueFrom(
+  async funct_generate_factura_fe_s(id: any) {
+
+    const ventas = await this.ventas_tem.funt_retorna_ventas_facturas(id);
+
+    if (!ventas) {
+      return
+    }
+
+    /* const response = await firstValueFrom(
       this.httpService.post('http://108.181.191.228:8081/api/ubl2.1/invoice', body,
         {
           headers: {
@@ -18,8 +28,8 @@ export class FacturarFeService {
           }
         }
       )
-    );
-    return response.data;
+    ); */
+    return ventas;
   }
 
   findAll() {
