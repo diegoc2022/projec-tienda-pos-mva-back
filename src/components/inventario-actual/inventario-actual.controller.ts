@@ -17,11 +17,6 @@ export class InventarioActualController {
     return this.inventarioActualService.funct_retorna_inventario_actual_s();
   }
 
-  @Get('inv/:id/:tipo')
-  funct_retorna_inventario_x_id_c(@Param('id') id: number, @Param('tipo') tipo: any) {
-    return this.inventarioActualService.funct_retorna_inventario_actual_s();
-  }
-
   @Patch(':id')
   funct_edita_inventario_actual_c(@Param('id') id: string, @Body() updateInventarioActualDto: UpdateInventarioActualDto) {
     return this.inventarioActualService.funct_edita_inventario_actual_s(id, updateInventarioActualDto);

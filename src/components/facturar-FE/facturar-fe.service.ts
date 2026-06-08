@@ -1,6 +1,4 @@
 import { Injectable } from '@nestjs/common';
-import { CreateFacturarFeDto } from './dto/create-facturar-fe.dto';
-import { UpdateFacturarFeDto } from './dto/update-facturar-fe.dto';
 import { HttpService } from '@nestjs/axios';
 import { firstValueFrom } from 'rxjs';
 
@@ -8,21 +6,19 @@ import { firstValueFrom } from 'rxjs';
 export class FacturarFeService {
   constructor(private readonly httpService: HttpService) { }
 
-  async create(dataDto: CreateFacturarFeDto) {
+  async funct_generate_factura_fe_s(body: any) {
     const response = await firstValueFrom(
-      this.httpService.post(
-        'http://108.181.191.228:8081/api/ubl2.1/invoice',
-        {
-
-        },
+      this.httpService.post('http://108.181.191.228:8081/api/ubl2.1/invoice', body,
         {
           headers: {
-            'Content-Type': 'application/json'
+            "Content-Type": "application/json",
+            "Accept": "application/json",
+            "host": "apidian2026-8.oo",
+            "Authorization": `Bearer ${process.env.API_TOKEN}`
           }
         }
       )
     );
-
     return response.data;
   }
 
@@ -34,7 +30,7 @@ export class FacturarFeService {
     return `This action returns a #${id} facturarFe`;
   }
 
-  update(id: number, updateFacturarFeDto: UpdateFacturarFeDto) {
+  update(id: number, data: any) {
     return `This action updates a #${id} facturarFe`;
   }
 

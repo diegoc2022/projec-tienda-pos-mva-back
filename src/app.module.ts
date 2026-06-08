@@ -34,9 +34,6 @@ dotenv.config(); // carga el archivo .env
 
 @Module({
   imports: [
-    GastosModule,
-    PagosModule,
-    ComprasHistoricoModule,
     TypeOrmModule.forRoot({
       type: 'postgres',
       host: process.env.DB_HOST,
@@ -75,7 +72,10 @@ dotenv.config(); // carga el archivo .env
     MovimientosModule,
     AperturaInventarioModule,
     InventarioActualModule,
-    InventarioModule
+    InventarioModule,
+    GastosModule,
+    PagosModule,
+    ComprasHistoricoModule
   ],
   controllers: [
     AppController

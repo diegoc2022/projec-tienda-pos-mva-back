@@ -25,17 +25,9 @@ export class InventarioActualService {
     return result;
   }
 
-  funct_retorna_inventario_x_id_s(id: number) {
-    this.repository.find({
-
-    })
-    return
-  }
 
   async funct_edita_inventario_actual_s(id: any, data: UpdateInventarioActualDto,
   ) {
-    console.log();
-
     const inventario = await this.repository.findOne({
       where: { codprod: id },
     });

@@ -31,8 +31,38 @@ export class EncabezadoFacturaEntity {
     @Column({ nullable: true })
     fecha_hasta: string;
 
-
     @Column({ type: 'timestamp', default: () => 'CURRENT_TIMESTAMP' })
     fecha_registros: Date;
+
+    @Column()
+    posicion_x1: Number;
+
+    @Column()
+    posicion_y1: Number;
+
+    @Column()
+    posicion_x2: Number;
+
+    @Column()
+    posicion_y2: Number;
+
+    @Column()
+    posicion_x3: Number;
+
+    @Column()
+    posicion_y3: Number;
+
+    @Column()
+    posicion_x4: Number;
+
+    @Column()
+    posicion_y4: Number;
+
+    @Column()
+    posicion_x5: Number;
+
+    @Column()
+    posicion_y5: Number;
+
 }
 
