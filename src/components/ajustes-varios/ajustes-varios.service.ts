@@ -6,7 +6,7 @@ import { EditaPreciosDto } from './dto/edita-precios.dto';
 import { EditaProductosDto } from './dto/edita.dto';
 
 @Injectable()
-export class EditaPreciosService {
+export class AjustesVariosService {
   fecha_actual = new Date();
   constructor(
     @InjectRepository(VentaProductoEntity)

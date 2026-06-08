@@ -8,5 +8,5 @@ export class CreateInventarioDto {
     id_tipo: string;
     nombre_tipo: string;
     vendedor: string;
-    fecha_registro: Date;
+    created_at: Date;
 }

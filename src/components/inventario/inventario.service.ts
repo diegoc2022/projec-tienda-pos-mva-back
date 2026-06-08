@@ -5,9 +5,10 @@ import { VentaProductoEntity } from '../venta-producto/entity/create_venta_produ
 import { format } from 'date-fns';
 import { DataSource } from 'typeorm';
 import { MovimientosEntity } from '../movimientos/entity/movimientos.entity';
-import { UpdateInventarioDto } from './dto/update-inventario';
 import { CreateInventarioDto } from './dto/create-inventario';
 import { InventariosEntity } from './entity/inventario.entity';
+import { InventarioActualService } from '../inventario-actual/inventario-actual.service';
+import { AjustesVariosService } from '../ajustes-varios/ajustes-varios.service';
 
 
 @Injectable()
@@ -26,12 +27,32 @@ export class InventarioService {
 
     @InjectRepository(InventariosEntity)
     private inventario: Repository<InventariosEntity>,
+
+    private inv_actual: InventarioActualService,
+    private ajustes: AjustesVariosService,
   ) { }
 
-  async funct_registra_inventarios_s(data: CreateInventarioDto[]) {
-    const result = await this.inventario.save(data)
+  async funct_registra_inventarios_s(data: CreateInventarioDto) {
+    // INSERTAMOS EN LA TABLA INVENTARIO
+    const result = await this.inventario.save(data);
+    if (result) {
+      // ACTUALIZAMOS EN LA TABLA INVENTARIO ACTUAL
+      await this.inv_actual.funct_edita_inventario_actual_s(data.codprod, {
+        stock_despues: data.stock_despues,
+        id_tipo: data.id_tipo,
+        nombre_tipo: data.nombre_tipo,
+        vendedor: data.vendedor
+      })
+
+      // ACTUALIZAMOS EN LA TABLA VENTA PRODUCTO
+      this.ajustes.funct_edita_existencia_s(data.codprod, {
+        existencia: data.stock_despues
+      })
+    }
     return result;
   }
+
+
 
   async funct_edita_compras_inventarios_s(data: any[]): Promise<any[]> {
     const fecha = format(this.fecha_actual, 'yyyy-MM-dd HH:mm');
@@ -94,6 +115,17 @@ export class InventarioService {
 
   async funct_retorna_inventario() {
     return await this.repository.find();
+  }
+
+
+  async funct_retorna_inventario_x_id_s(id: number, tipo: any) {
+    const result = this.inventario.find({
+      where: {
+        id_inventario: id,
+        id_tipo: tipo
+      }
+    });
+    return result;
   }
 
 }

@@ -13,9 +13,9 @@ export class InventarioActualService {
     private readonly repository: Repository<InventarioActual>
   ) { }
 
-  async funct_create_inventario_actual_s(createInventarioActualDtos: CreateInventarioActualDto[],): Promise<InventarioActual[]> {
+  async funct_create_inventario_actual_s(data: CreateInventarioActualDto[],): Promise<InventarioActual[]> {
     const inventarios = this.repository.create(
-      createInventarioActualDtos,
+      data,
     );
     return await this.repository.save(inventarios);
   }
@@ -25,14 +25,19 @@ export class InventarioActualService {
     return result;
   }
 
-  findOne(id: number) {
-    return `This action returns a #${id} inventarioActual`;
+  funct_retorna_inventario_x_id_s(id: number) {
+    this.repository.find({
+
+    })
+    return
   }
 
-  async funct_edita_inventario_actual_s(id: string, updateInventarioActualDto: UpdateInventarioActualDto,
+  async funct_edita_inventario_actual_s(id: any, data: UpdateInventarioActualDto,
   ) {
+    console.log();
+
     const inventario = await this.repository.findOne({
-      where: { codProd: id },
+      where: { codprod: id },
     });
 
     if (!inventario) {
@@ -40,7 +45,12 @@ export class InventarioActualService {
         `No existe un inventario con id ${id}`,
       );
     }
-    Object.assign(inventario, updateInventarioActualDto);
+    Object.assign(inventario, {
+      stock_despues: data.stock_despues,
+      id_tipo: data.id_tipo,
+      nombre_tipo: data.nombre_tipo,
+      vendedor: data.vendedor
+    });
 
     return await this.repository.save(inventario);
   }

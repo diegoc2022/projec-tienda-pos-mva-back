@@ -1,5 +1,5 @@
-import { EditaPreciosService } from './edita-precios.service';
-import { EditaPreciosController } from './edita-precios.controller';
+import { AjustesVariosService } from './ajustes-varios.service';
+import { AjustesVariosController } from './ajustes-varios.controller';
 import { Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { VentaProductoEntity } from '../venta-producto/entity/create_venta_producto.entity';
@@ -7,8 +7,8 @@ import { VentaProductoEntity } from '../venta-producto/entity/create_venta_produ
 @Module({
     imports: [TypeOrmModule.forFeature([VentaProductoEntity])],
     controllers: [
-        EditaPreciosController],
+        AjustesVariosController],
     providers: [
-        EditaPreciosService],
+        AjustesVariosService],
 })
-export class EditaPreciosModule { }
+export class AjustesVariosModule { }

@@ -4,5 +4,5 @@ export class UpdateInventarioDto {
     stock_despues: number;
     motivo: string;
     vendedor: string;
-    fecha_registro: Date;
+    updated_at: Date;
 }

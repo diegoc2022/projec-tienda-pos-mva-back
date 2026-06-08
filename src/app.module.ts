@@ -4,14 +4,13 @@ import { ComprasHistoricoModule } from './components/compras-historico/compras-h
 import { VentasHistoricoModule } from './components/ventas-historico/ventashistorico.module';
 import { ComprasFacturasModule } from './components/compras-facturas/compras-facturas.module';
 import { ComprasModule } from './components/compras/compras.module';
-import { EditaPreciosModule } from './components/ajustes-varios/edita-precios.module';
+import { AjustesVariosModule } from './components/ajustes-varios/ajustes-varios.module';
 import { CajaModule } from './components/apertura-caja/caja.module';
 import { IdSecuenciaModule } from './components/secuencia-factura/id-secuencia.module';
 import { VinculosModule } from './components/viculos/vinculos.module';
 import { CloseVentasModule } from './components/close-ventas/close-ventas.module';
 import { EncabezadoModule } from './components/encabezado-fact/encabezado.module';
 import { VentasProductosModule } from './components/ventas-temp/ventas_productos.module';
-import { InventarioModule } from './components/inventario/inventario.module';
 import { ProveedoresModule } from './components/proveedores/proveedores.module';
 import { EmpleadosModule } from './components/empleados/empleados.module';
 import { Module } from '@nestjs/common';
@@ -30,6 +29,7 @@ import { LoginModule } from './components/usuarios/usuario.module';
 import { MovimientosModule } from './components/movimientos/movimientos.module';
 import { AperturaInventarioModule } from './components/apertura-inventario/apertura-inventario.module';
 import { InventarioActualModule } from './components/inventario-actual/inventario-actual.module';
+import { InventarioModule } from './components/inventario/inventario.module';
 dotenv.config(); // carga el archivo .env
 
 @Module({
@@ -51,7 +51,7 @@ dotenv.config(); // carga el archivo .env
     VentasHistoricoModule,
     ComprasFacturasModule,
     ComprasModule,
-    EditaPreciosModule,
+    AjustesVariosModule,
     CajaModule,
     VinculosModule,
     CloseVentasModule,
@@ -59,7 +59,6 @@ dotenv.config(); // carga el archivo .env
     EmpleadosModule,
     ProductosModule,
     ProveedoresModule,
-    InventarioModule,
     VentasProductosModule,
     ComprasModule,
     EncabezadoModule,
@@ -75,7 +74,8 @@ dotenv.config(); // carga el archivo .env
     LoginModule,
     MovimientosModule,
     AperturaInventarioModule,
-    InventarioActualModule
+    InventarioActualModule,
+    InventarioModule
   ],
   controllers: [
     AppController

@@ -1,13 +1,13 @@
 import { Body, Controller, Param, ParseIntPipe, Patch } from '@nestjs/common';
-import { EditaPreciosService } from './edita-precios.service';
+import { AjustesVariosService } from './ajustes-varios.service';
 import { EditaPreciosDto } from './dto/edita-precios.dto';
 import { EditaProductosDto } from './dto/edita.dto';
 
 @Controller('editar')
-export class EditaPreciosController {
+export class AjustesVariosController {
 
     constructor(
-        private editaPreciosService: EditaPreciosService
+        private editaPreciosService: AjustesVariosService
     ) { }
 
     @Patch('precioVentas/:cod')

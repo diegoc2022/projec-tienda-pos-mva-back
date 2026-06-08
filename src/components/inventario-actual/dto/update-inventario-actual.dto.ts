@@ -1,9 +1,10 @@
 
 export class UpdateInventarioActualDto {
-    codProd: string
-    stock_actual: number;
-    stock_despues: number;
-    motivo: string;
-    vendedor: string;
-    fecha_inventario: Date;
+    codprod?: string
+    stock_actual?: number;
+    stock_despues?: number;
+    id_tipo?: string;
+    nombre_tipo?: string;
+    vendedor?: string;
+    updated_at?: Date;
 }

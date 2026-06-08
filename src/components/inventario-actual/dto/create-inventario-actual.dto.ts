@@ -1,10 +1,12 @@
 
 export class CreateInventarioActualDto {
-    codProd: string;
+    codprod: string;
     descripcion: string;
     stock_actual: number;
     stock_despues: number;
-    motivo: string;
+    id_tipo: string;
+    nombre_tipo: string;
     vendedor: string;
-    fecha_inventario: Date;
+    created_at: Date;
+    updated_at: Date;
 }

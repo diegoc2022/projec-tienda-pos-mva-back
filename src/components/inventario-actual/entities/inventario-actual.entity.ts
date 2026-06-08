@@ -1,26 +1,32 @@
-import { Column, Entity, PrimaryColumn, UpdateDateColumn } from "typeorm";
+import { Column, CreateDateColumn, Entity, PrimaryColumn, UpdateDateColumn } from "typeorm";
 
 @Entity({ name: 'tbl_inventario_actual' })
 export class InventarioActual {
     @PrimaryColumn()
-    codProd: string;
+    codprod: string;
 
     @Column({ nullable: false })
     descripcion: string;
 
-    @Column({ type: 'int' })
+    @Column()
     stock_actual: number;
 
-    @Column({ type: 'int' })
+    @Column()
     stock_despues: number;
 
     @Column({ nullable: true })
-    motivo: string;
+    id_tipo: string;
+
+    @Column({ nullable: true })
+    nombre_tipo: string;
 
     @Column({ nullable: true })
     vendedor: string;
 
+    @CreateDateColumn()
+    created_at: Date;
+
     @UpdateDateColumn({ type: 'timestamp without time zone' })
-    fecha_inventario: Date;
+    updated_at: Date;
 
 }
