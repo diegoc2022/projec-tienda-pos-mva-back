@@ -1,4 +1,5 @@
-import { Column, CreateDateColumn, Entity, PrimaryGeneratedColumn, UpdateDateColumn } from "typeorm";
+import { VentaProductoEntity } from "src/components/venta-producto/entity/create_venta_producto.entity";
+import { Column, CreateDateColumn, Entity, JoinColumn, ManyToOne, PrimaryGeneratedColumn } from "typeorm";
 
 @Entity({ name: 'tbl_inventario' })
 export class InventariosEntity {
@@ -10,6 +11,9 @@ export class InventariosEntity {
 
     @Column({ unique: true })
     codprod: string;
+
+    @Column({ unique: true })
+    descripcion: string;
 
     @Column({ type: 'int' })
     stock_actual: number;

@@ -26,8 +26,6 @@ export class ComprasService {
     }
 
     async functEliminaFacturaCompras(id: any): Promise<boolean> {
-        console.log("Fact: ", id);
-
         const result = await this.compras.delete({ num_factura: id });
         return result.affected > 0;
     }

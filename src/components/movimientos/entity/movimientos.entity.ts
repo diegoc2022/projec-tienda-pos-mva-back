@@ -35,7 +35,7 @@ export class MovimientosEntity {
     fecha_registro: Date;
 
     @ManyToOne(() => VentaProductoEntity, (producto) => producto.codProd)
-    @JoinColumn({ name: 'codProd' })
+    @JoinColumn({ name: 'codprod' })
     producto: VentaProductoEntity;
 
 }

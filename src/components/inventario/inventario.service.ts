@@ -18,18 +18,12 @@ export class InventarioService {
   existencia: number = 0;
 
   constructor(
-    @InjectRepository(VentaProductoEntity)
-    private readonly repository: Repository<VentaProductoEntity>,
-    private readonly dataSource: DataSource,
-
-    @InjectRepository(MovimientosEntity)
-    private movimientos: Repository<MovimientosEntity>,
-
     @InjectRepository(InventariosEntity)
     private inventario: Repository<InventariosEntity>,
 
     private inv_actual: InventarioActualService,
     private ajustes: AjustesVariosService,
+    private readonly dataSource: DataSource,
   ) { }
 
   async funct_registra_inventarios_s(data: CreateInventarioDto) {
@@ -114,9 +108,8 @@ export class InventarioService {
   }
 
   async funct_retorna_inventario() {
-    return await this.repository.find();
+    return await this.inventario.find();
   }
-
 
   async funct_retorna_inventario_x_id_s(id: number, tipo: any) {
     const result = this.inventario.find({
