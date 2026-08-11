@@ -30,12 +30,12 @@ export class VinculosController {
     }
 
     @Delete(':codVinc')
-    funct_elimina_viculos_c(@Param('codVinc') codVinc:any) {
+    funct_elimina_viculos_c(@Param('codVinc') codVinc: any) {
         return this.vinculosService.funct_elimina_vinculos_s(codVinc)
     }
 
-    @Delete(':codInit/:codVinc')
-    funct_elimina_viculo_asociacion_c(@Param('codInit') codInit: any, @Param('codVinc') codVinc:any) {
-        return this.vinculosService.funct_elimina_vinculo_asociacion_s(codInit,codVinc)
+    @Delete('asoc/:codInit/:codVinc')
+    funct_elimina_viculo_asociacion_c(@Param('codInit') codInit: any, @Param('codVinc') codVinc: any) {
+        return this.vinculosService.funct_elimina_vinculo_asociacion_s(codInit, codVinc)
     }
 }
