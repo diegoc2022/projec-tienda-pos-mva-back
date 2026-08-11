@@ -34,8 +34,4 @@ export class MovimientosEntity {
     @CreateDateColumn()
     fecha_registro: Date;
 
-    @ManyToOne(() => VentaProductoEntity, (producto) => producto.codProd)
-    @JoinColumn({ name: 'codprod' })
-    producto: VentaProductoEntity;
-
 }

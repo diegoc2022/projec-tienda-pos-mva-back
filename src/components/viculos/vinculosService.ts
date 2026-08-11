@@ -149,4 +149,23 @@ export class VinculosService {
 
   }
 
+  async funct_elimina_vinculo_asociacion_s(codInit:any,codVinc: any) {
+    const result = await this.vinculosRepository.find({
+      where: {
+        codigoInicial:codInit.toUpperCase(),
+        codigoVinculo: codVinc.toUpperCase()
+      }
+    })
+
+    if (result.length > 0) {
+      return await this.vinculosRepository.delete({ codigoInicial:codInit, codigoVinculo: codVinc });
+    } else {
+      return {
+        "code": 409,
+        "msg": "El viculo que intenta eliminar no existe"
+      }
+    }
+
+  }
+
 }
