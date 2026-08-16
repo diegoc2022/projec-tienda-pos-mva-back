@@ -143,7 +143,7 @@ export class NominaService {
 
             if (registroVerificado) {
               console.log("=== VERIFICACIÓN EXITOSA ===");
-              console.log("Registro encontrado en BD:", JSON.stringify(registroVerificado, null, 2));
+              //console.log("Registro encontrado en BD:", JSON.stringify(registroVerificado, null, 2));
             } else {
               console.log("=== ADVERTENCIA: REGISTRO NO ENCONTRADO EN BD ===");
             }
